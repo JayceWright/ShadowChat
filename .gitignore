@@ -1,1 +1,4 @@
 *.class
+backend/target/
+*.log
+backend/dependency-reduced-pom.xml
