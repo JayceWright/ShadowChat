@@ -8,9 +8,13 @@
 </head>
 <body>
     <div class="terminal-container">
+        <div class="input-container" style="margin-bottom: 10px;">
+            <span class="prompt">Username: </span>
+            <input type="text" id="username-input" class="chat-input" placeholder="Guest" autocomplete="off">
+        </div>
         <div id="chat-logs" class="chat-logs"></div>
         <div class="input-container">
-            <span class="prompt">guest@shadow-net:~$ </span>
+            <span class="prompt" id="cli-prompt">Guest@shadow-net:~$ </span>
             <input type="text" id="chat-input" class="chat-input" autofocus autocomplete="off">
         </div>
     </div>
