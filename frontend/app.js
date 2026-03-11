@@ -13,16 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
         cliPrompt.textContent = `${getUsername()}@shadow-net:~$ `;
     });
 
-    function appendLog(content, type = 'message', username = '') {
+    function appendLog(content, type = 'message', username = '', timestamp = null) {
         const div = document.createElement('div');
+        
+        let timeString = '';
+        if (timestamp) {
+            const date = new Date(timestamp);
+            timeString = `<span class="timestamp">[${date.toLocaleTimeString()}]</span> `;
+        }
 
         if (type === 'system') {
-            div.textContent = content;
-            div.style.color = 'gray';
-            div.style.opacity = '0.7';
-            div.style.fontStyle = 'italic';
+            div.innerHTML = `${timeString}<span class="system-message">${content}</span>`;
         } else if (type === 'message') {
-            div.textContent = `[${username}]: ${content}`;
+            div.innerHTML = `${timeString}<span class="username">[${username}]</span>: ${content}`;
         } else {
             div.textContent = content;
         }
@@ -32,16 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     ws.onopen = () => {
-        appendLog('[System]: Connection established to Shadow-Net.', 'system');
+        // We let the server broadcast the system message about the new connection
     };
 
     ws.onmessage = (event) => {
         try {
             const data = JSON.parse(event.data);
             if (data.type === 'system') {
-                appendLog(data.content, 'system');
+                appendLog(data.content, 'system', '', data.timestamp);
             } else if (data.type === 'message') {
-                appendLog(data.content, 'message', data.username);
+                appendLog(data.content, 'message', data.username, data.timestamp);
             } else {
                 appendLog(`> ${event.data}`);
             }
@@ -52,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     ws.onclose = () => {
-        appendLog('[System]: Connection lost to Shadow-Net.', 'system');
+        // We let the server broadcast the system message about the disconnection
+        // Only show a local message if desired, but we'll stick to server messages globally
     };
 
     ws.onerror = (error) => {
