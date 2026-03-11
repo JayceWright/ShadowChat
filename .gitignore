@@ -2,3 +2,16 @@
 backend/target/
 *.log
 backend/dependency-reduced-pom.xml
+
+# VS Code / Antigravity IDE settings (personal, not shared)
+.vscode/
+
+# Maven auto-downloaded by run.ps1
+.mvn-dist/
+
+# Dev run script (optional, uncomment if you don't want it in repo)
+# run.ps1
+java_setup_notes.md
+run.ps1
+java_setup_notes_upd.md
+java_debug_guide.md
