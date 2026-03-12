@@ -60,7 +60,11 @@ public class ChatServer extends WebSocketServer {
         systemMessage.addProperty("timestamp", System.currentTimeMillis());
         String sysMsgStr = gson.toJson(systemMessage);
 
-        broadcast(sysMsgStr);
+        for (WebSocket client : getConnections()) {
+            if (client != conn) {
+                client.send(sysMsgStr);
+            }
+        }
     }
 
     @Override
