@@ -16,16 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function createLogElement(content, type = 'message', username = '', timestamp = null) {
         const div = document.createElement('div');
         
-        let timeString = '';
         if (timestamp) {
             const date = new Date(timestamp);
-            timeString = `<span class="timestamp">[${date.toLocaleTimeString()}]</span> `;
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'timestamp';
+            timeSpan.textContent = `[${date.toLocaleTimeString()}] `;
+            div.appendChild(timeSpan);
         }
 
         if (type === 'system') {
-            div.innerHTML = `${timeString}<span class="system-message">${content}</span>`;
+            const systemSpan = document.createElement('span');
+            systemSpan.className = 'system-message';
+            systemSpan.textContent = content;
+            div.appendChild(systemSpan);
         } else if (type === 'message') {
-            div.innerHTML = `${timeString}<span class="username">[${username}]</span>: ${content}`;
+            const userSpan = document.createElement('span');
+            userSpan.className = 'username';
+            userSpan.textContent = `[${username}]`;
+            div.appendChild(userSpan);
+
+            div.appendChild(document.createTextNode(`: ${content}`));
         } else {
             div.textContent = content;
         }
