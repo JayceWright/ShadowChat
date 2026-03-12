@@ -1,8 +1,8 @@
 [main] INFO org.shadowchat.ChatServer - ChatServer running on ws://0.0.0.0:8080/chat
 [WebSocketSelector-23] INFO org.shadowchat.ChatServer - Server started successfully on port 8080
-[WebSocketWorker-19] INFO org.shadowchat.ChatServer - New connection from /[0:0:0:0:0:0:0:1]:33372 on path /chat
-[WebSocketWorker-19] INFO org.shadowchat.ChatServer - Received message from /[0:0:0:0:0:0:0:1]:33372: Hello, Shadow-Net!
-[WebSocketSelector-23] INFO org.shadowchat.ChatServer - Closed connection to /[0:0:0:0:0:0:0:1]:33372 with exit code 1000 additional info:
-[WebSocketWorker-20] INFO org.shadowchat.ChatServer - New connection from /[0:0:0:0:0:0:0:1]:41390 on path /chat
-[WebSocketWorker-20] INFO org.shadowchat.ChatServer - Received message from /[0:0:0:0:0:0:0:1]:41390: Hello, this is a test message from Playwright!
-[WebSocketSelector-23] INFO org.shadowchat.ChatServer - Closed connection to /[0:0:0:0:0:0:0:1]:41390 with exit code 1001 additional info:
+[WebSocketWorker-19] INFO org.shadowchat.ChatServer - New connection from /[0:0:0:0:0:0:0:1]:42804 on path /chat
+[WebSocketWorker-19] INFO org.shadowchat.ChatServer - Received message from /[0:0:0:0:0:0:0:1]:42804: {"type": "message", "username": "TestBot", "content": "Hello, Shadow-Net!"}
+[WebSocketSelector-23] INFO org.shadowchat.ChatServer - Closed connection to /[0:0:0:0:0:0:0:1]:42804 with exit code 1000 additional info:
+[WebSocketWorker-20] INFO org.shadowchat.ChatServer - New connection from /[0:0:0:0:0:0:0:1]:52038 on path /chat
+[WebSocketWorker-20] INFO org.shadowchat.ChatServer - Received message from /[0:0:0:0:0:0:0:1]:52038: {"type": "message", "username": "TestBot", "content": "Hello, Shadow-Net!"}
+[WebSocketSelector-23] INFO org.shadowchat.ChatServer - Closed connection to /[0:0:0:0:0:0:0:1]:52038 with exit code 1000 additional info:
