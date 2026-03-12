@@ -1,5 +1,5 @@
 # Shadow-Net Chat (WebSocket)
 
-## Backend (Java)
+## Backend (Java (WebSockets, Maven))
 ## Frontend (Vanilla JS)
-Многопользовательский реал-тайм чат. Бэкенд на Java (WebSockets, Maven). Фронтенд на Vanilla JS. Обмен данными через JSON-протокол. Хранение истории в In-Memory структуре
+Многопользовательский реал-тайм чат. Обмен данными через JSON-протокол. Хранение истории в In-Memory структуре
