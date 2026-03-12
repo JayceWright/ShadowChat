@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cliPrompt.textContent = `${getUsername()}@shadow-net:~$ `;
     });
 
-    function appendLog(content, type = 'message', username = '', timestamp = null) {
+    function createLogElement(content, type = 'message', username = '', timestamp = null) {
         const div = document.createElement('div');
         
         let timeString = '';
@@ -29,7 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             div.textContent = content;
         }
+        return div;
+    }
 
+    function appendLog(content, type = 'message', username = '', timestamp = null) {
+        const div = createLogElement(content, type, username, timestamp);
         logsElement.appendChild(div);
         logsElement.scrollTop = logsElement.scrollHeight;
     }
@@ -42,13 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const data = JSON.parse(event.data);
             if (data.type === 'history') {
+                const fragment = document.createDocumentFragment();
                 data.messages.forEach(msg => {
                     if (msg.type === 'system') {
-                        appendLog(msg.content, 'system', '', msg.timestamp);
+                        fragment.appendChild(createLogElement(msg.content, 'system', '', msg.timestamp));
                     } else if (msg.type === 'message') {
-                        appendLog(msg.content, 'message', msg.username, msg.timestamp);
+                        fragment.appendChild(createLogElement(msg.content, 'message', msg.username, msg.timestamp));
                     }
                 });
+                logsElement.appendChild(fragment);
+                logsElement.scrollTop = logsElement.scrollHeight;
             } else if (data.type === 'system') {
                 appendLog(data.content, 'system', '', data.timestamp);
             } else if (data.type === 'message') {
