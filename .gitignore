@@ -14,4 +14,4 @@ backend/dependency-reduced-pom.xml
 java_setup_notes.md
 run.ps1
 java_setup_notes_upd.md
-java_debug_guide.mdserver.log
+java_debug_guide.md
