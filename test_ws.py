@@ -19,15 +19,12 @@ async def test_chat():
             print(f"Received message 1 (history): {response}")
 
             response2 = await websocket.recv()
-            print(f"Received message 2 (system connect): {response2}")
+            print(f"Received message 2: {response2}")
 
-            response3 = await websocket.recv()
-            print(f"Received message 3 (our message): {response3}")
-
-            if "Hello, Shadow-Net!" in response3:
-                print("Broadcast successful!")
+            if "Hello, Shadow-Net!" in response2:
+                print("Broadcast successful! And we skipped 'New hacker connected' successfully.")
             else:
-                print("Broadcast failed.")
+                print("Broadcast failed or received unexpected message.")
     except Exception as e:
         print(f"Error during WebSocket test: {e}")
 
