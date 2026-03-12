@@ -6,13 +6,25 @@ async def test_chat():
     try:
         async with websockets.connect(uri) as websocket:
             print("Connected to WebSocket.")
-            await websocket.send("Hello, Shadow-Net!")
+            import json
+            payload = {
+                "type": "message",
+                "username": "TestBot",
+                "content": "Hello, Shadow-Net!"
+            }
+            await websocket.send(json.dumps(payload))
             print("Message sent.")
 
             response = await websocket.recv()
-            print(f"Received message: {response}")
+            print(f"Received message 1 (history): {response}")
 
-            if response == "Hello, Shadow-Net!":
+            response2 = await websocket.recv()
+            print(f"Received message 2 (system connect): {response2}")
+
+            response3 = await websocket.recv()
+            print(f"Received message 3 (our message): {response3}")
+
+            if "Hello, Shadow-Net!" in response3:
                 print("Broadcast successful!")
             else:
                 print("Broadcast failed.")

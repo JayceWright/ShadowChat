@@ -41,7 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ws.onmessage = (event) => {
         try {
             const data = JSON.parse(event.data);
-            if (data.type === 'system') {
+            if (data.type === 'history') {
+                data.messages.forEach(msg => {
+                    if (msg.type === 'system') {
+                        appendLog(msg.content, 'system', '', msg.timestamp);
+                    } else if (msg.type === 'message') {
+                        appendLog(msg.content, 'message', msg.username, msg.timestamp);
+                    }
+                });
+            } else if (data.type === 'system') {
                 appendLog(data.content, 'system', '', data.timestamp);
             } else if (data.type === 'message') {
                 appendLog(data.content, 'message', data.username, data.timestamp);
@@ -66,6 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
     inputElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const message = inputElement.value.trim();
+
+            if (message === '/clear') {
+                logsElement.innerHTML = '';
+                inputElement.value = '';
+                return;
+            }
+
             if (message && ws.readyState === WebSocket.OPEN) {
                 const payload = {
                     type: "message",
