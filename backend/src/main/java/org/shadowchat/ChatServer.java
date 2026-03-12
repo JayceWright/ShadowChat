@@ -60,7 +60,6 @@ public class ChatServer extends WebSocketServer {
         systemMessage.addProperty("timestamp", System.currentTimeMillis());
         String sysMsgStr = gson.toJson(systemMessage);
 
-        addToHistory(sysMsgStr);
         broadcast(sysMsgStr);
     }
 
@@ -75,7 +74,6 @@ public class ChatServer extends WebSocketServer {
         systemMessage.addProperty("timestamp", System.currentTimeMillis());
         String sysMsgStr = gson.toJson(systemMessage);
 
-        addToHistory(sysMsgStr);
         broadcast(sysMsgStr);
     }
 
@@ -117,7 +115,10 @@ public class ChatServer extends WebSocketServer {
             jsonMessage.addProperty("timestamp", System.currentTimeMillis());
             
             String updatedMessage = gson.toJson(jsonMessage);
-            addToHistory(updatedMessage);
+
+            if (jsonMessage.has("type") && "message".equals(jsonMessage.get("type").getAsString())) {
+                addToHistory(updatedMessage);
+            }
 
             // Broadcast the updated JSON
             broadcast(updatedMessage);
