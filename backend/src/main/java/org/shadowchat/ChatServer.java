@@ -24,9 +24,9 @@ public class ChatServer extends WebSocketServer {
     private static final Logger logger = LoggerFactory.getLogger(ChatServer.class);
     private final Gson gson = new Gson();
 
-    private final LinkedList<String> chatHistory = new LinkedList<>();
+    final LinkedList<String> chatHistory = new LinkedList<>();
     private final Map<WebSocket, String> activeUsers = new ConcurrentHashMap<>();
-    private static final int MAX_HISTORY = 50;
+    static final int MAX_HISTORY = 50;
 
     public ChatServer(InetSocketAddress address) {
         super(address);
@@ -77,7 +77,7 @@ public class ChatServer extends WebSocketServer {
         broadcast(sysMsgStr);
     }
 
-    private void addToHistory(String message) {
+    void addToHistory(String message) {
         synchronized (chatHistory) {
             chatHistory.add(message);
             if (chatHistory.size() > MAX_HISTORY) {
