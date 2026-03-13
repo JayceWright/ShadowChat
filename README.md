@@ -2,7 +2,7 @@
 
 Многопользовательский чат в реальном времени, стилизованный под хакерский терминал. Проект демонстрирует работу с постоянными двунаправленными соединениями через протокол WebSockets.
 
-![Интерфейс Shadow-Net](docs/screenshot.png)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/efa17f70-1f63-4d7c-bf52-bc744c5d3342" />
 
 ## 🛠 Технологический стек
 * **Backend:** Java 17+, Maven, `org.java-websocket`.
