@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createLogElement(content, type = 'message', username = '', timestamp = null) {
         const div = document.createElement('div');
+        div.classList.add('message-element');
         
         if (timestamp) {
             const date = new Date(timestamp);
@@ -36,6 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
             div.appendChild(userSpan);
 
             div.appendChild(document.createTextNode(`: ${content}`));
+
+            if (username === getUsername()) {
+                div.classList.add('my-message');
+            }
         } else {
             div.textContent = content;
         }
@@ -107,6 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 ws.send(JSON.stringify(payload));
                 inputElement.value = '';
             }
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        const selection = window.getSelection();
+        if (selection && selection.toString().length > 0) {
+            return;
+        }
+        if (event.target !== usernameInput && event.target !== inputElement) {
+            inputElement.focus();
         }
     });
 });
